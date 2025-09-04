@@ -1,0 +1,34 @@
+<div class="dashboard">
+    <h1 class="h1 fw-medium text-primary-emphasis" style="font-size: 40px; margin-bottom: 60px ">
+        Главная
+    </h1>
+    <section class="content">
+        <div class="interval" style="margin-bottom: 140px">
+            <button class="btn btn-outline-secondary active" style="margin-right: 20px; width: 100px;">Сегодня</button>
+            <button class="btn btn-outline-secondary" style="margin-right: 20px; width: 100px;">Неделя</button>
+            <button class="btn btn-outline-secondary" style="margin-right: 20px; width: 100px;">Месяц</button>
+            <button class="btn btn-outline-secondary" style="margin-right: 20px; width: 100px;">Год</button>
+            <button class="btn btn-outline-secondary" style="margin-right: 20px; width: 100px;">Все</button>
+            <button class="btn btn-outline-secondary" style="margin-right: 20px; width: 100px;">Интервал</button>
+            <label for="date-start">
+                с
+                <input type="date" name="date-start" id="date-start" class="border-0 text-secondary">
+            </label>
+            <label for="date-end">
+                по
+                <input type="date" name="date-end" id="date-end" class="border-0 text-secondary">
+            </label>
+        </div>
+        <div class="schedule d-flex justify-content-center">
+            <div>
+                <h2 class="h2 text-center" style="color: #290661; font-size: 28px;">Доходы</h2>
+                <canvas id="myChart"  ></canvas>
+            </div>
+            <div class="vr" style="margin: 0 84px"></div>
+            <div>
+                <h2 class="h2 text-center" style="color: #290661; font-size: 28px;">Расходы</h2>
+                <canvas id="myChart2" ></canvas>
+            </div>
+        </div>
+    </section>
+</div>
