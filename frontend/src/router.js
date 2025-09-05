@@ -69,6 +69,7 @@ export class Router {
                 load: () => {
                     new Income(this.openNewRoute.bind(this));
                 },
+
             },
             {
                 route: '/expenses',

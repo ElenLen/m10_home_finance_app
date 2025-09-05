@@ -16,20 +16,26 @@ export class Home {
 
                 datasets: [{
                     label: 'Dataset',
-                    data: [10, 20, 30, 35, 5],
+                    data: [10, 20, 30, 25, 15],
                     backgroundColor: ['#DC3545', '#FD7E14', '#FFC107', '#20C997', '#0D6EFD'],
 
                 }]
             },
             options: {
-                responsive: true,
+                // responsive: true,
                 color: 'black',
                 width: 360,
-                wrap: false,
+                // wrap: false,
+                layout: {
+                    padding: {
+                        bottom: 40
+                    }
+                },
                 plugins: {
                     legend: {
                         position: 'top',
                         boxWidth: 1470,
+                        fullSize: true,
                     },
                     // title: {
                     //     display: true,
@@ -53,6 +59,11 @@ export class Home {
             options: {
                 responsive: true,
                 color: 'black',
+                layout: {
+                    padding: {
+                        bottom: 40
+                    }
+                },
                 plugins: {
                     legend: {
                         position: 'top',

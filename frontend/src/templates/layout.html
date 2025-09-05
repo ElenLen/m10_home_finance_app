@@ -14,9 +14,9 @@
             </svg>
         </a>
         <hr>
-        <ul class="nav nav-pills flex-column mb-auto mx-3" style="margin-top: 44px; font-size: 14px;">
-            <li class="nav-item">
-                <a href="/" class="nav-link active" aria-current="page">
+        <ul class="nav nav-pills flex-column mb-auto mx-3 gap-1" style="margin-top: 44px; font-size: 14px;">
+            <li class="nav-item ">
+                <a href="/" class="nav-link active menuItem" aria-current="page">
                     <svg class="bi pe-none me-2" width="15" height="14" viewBox="0 0 15 14" fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M1.5 12.3964V5.89644H2.5V12.3964C2.5 12.6726 2.72386 12.8964 3 12.8964H12C12.2761 12.8964 12.5 12.6726 12.5 12.3964V5.89644H13.5V12.3964C13.5 13.2249 12.8284 13.8964 12 13.8964H3C2.17157 13.8964 1.5 13.2249 1.5 12.3964Z"
@@ -32,8 +32,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/income-expenses" class="nav-link link-body-emphasis text-primary-emphasis btn  btn-primary">
-
+                <a href="/income-expenses"
+                   class=" menuItem nav-link link-body-emphasis text-primary-emphasis btn  btn-primary">
                     <svg class="bi pe-none me-2 " width="16" height="16" viewBox="0 0 16 16" fill="#052C65">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M11 15C13.2091 15 15 13.2091 15 11C15 8.79086 13.2091 7 11 7C8.79086 7 7 8.79086 7 11C7 13.2091 8.79086 15 11 15ZM16 11C16 13.7614 13.7614 16 11 16C8.23858 16 6 13.7614 6 11C6 8.23858 8.23858 6 11 6C13.7614 6 16 8.23858 16 11Z"
@@ -49,7 +49,8 @@
                 </a>
             </li>
             <li class="nav-item mb-1 dropdown">
-                <button class="nav-link w-100 justify-content-between btn btn-primary btn-toggle d-inline-flex align-items-center rounded border-0 collapsed text-primary-emphasis"
+                <button class="menuItem  nav-link w-100 justify-content-between btn btn-primary btn-toggle d-inline-flex
+                align-items-center rounded border-0 collapsed text-primary-emphasis"
                         data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
                     Категории
                     <svg width="7" height="14" viewBox="0 0 7 14" fill="#052C65">
@@ -57,22 +58,21 @@
                               d="M0.145063 13.3539C0.051021 13.2601 -0.00183105 13.1327 -0.00183105 12.9999C-0.00183105 12.867 0.051021 12.7397 0.145063 12.6459L5.79206 6.99987L0.145063 1.35387C0.0185907 1.2274 -0.0308022 1.04306 0.0154897 0.8703C0.0617817 0.697536 0.196726 0.562593 0.36949 0.5163C0.542254 0.470008 0.726591 0.519401 0.853063 0.645873L6.85306 6.64587C6.9471 6.73968 6.99996 6.86705 6.99996 6.99987C6.99996 7.1327 6.9471 7.26007 6.85306 7.35387L0.853063 13.3539C0.759259 13.4479 0.63189 13.5008 0.499063 13.5008C0.366235 13.5008 0.238867 13.4479 0.145063 13.3539Z"/>
                     </svg>
                 </button>
-                <div class="collapse text-primary-emphasis" id="home-collapse">
-                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li class="text-start btn btn-primary w-100" style=" font-size: 14px;">
-                            <a href="/income"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded text-primary-emphasis">
-                                Доходы
-                            </a>
-                        </li>
-                        <li class="text-start btn btn-primary w-100" style=" font-size: 14px;">
-                            <a href="/expenses"
-                               class="link-body-emphasis d-inline-flex text-decoration-none rounded text-primary-emphasis">
-                                Расходы
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                <ul class="collapse text-primary-emphasis dropdown-menu btn-toggle-nav list-unstyled
+                     fw-normal small border-0" id="home-collapse">
+                    <li class="menuItem text-start btn  w-100 mb-1" style=" font-size: 14px;">
+                        <a href="/income"
+                           class="dropdown-item link-body-emphasis d-inline-flex text-decoration-none rounded text-primary-emphasis">
+                            Доходы
+                        </a>
+                    </li>
+                    <li class="menuItem text-start btn  w-100" style=" font-size: 14px;">
+                        <a href="/expenses"
+                           class="dropdown-item link-body-emphasis d-inline-flex text-decoration-none rounded text-primary-emphasis">
+                            Расходы
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
         <div class="text-primary-emphasis fw-medium" style="margin: 0 0 4px 20px; font-size: 14px">
@@ -91,7 +91,7 @@
                 </svg>
                 <strong class="text-primary-emphasis fw-normal" style="font-size: 14px; ">Roman Chernov</strong>
             </a>
-            <ul class="dropdown-menu text-small shadow">
+            <ul class="dropdown-menu text-small shadow ">
                 <li><a class="dropdown-item" href="/logout">Sign out</a></li>
             </ul>
         </div>

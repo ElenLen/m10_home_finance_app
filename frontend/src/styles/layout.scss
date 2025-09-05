@@ -1,3 +1,21 @@
-.btn-toggle[aria-expanded="true"]::before {
-  transform: rotate(90deg);
+.menuItem:focus-within svg {
+  //transform: rotate(90deg);
+}
+
+.menuItem:hover svg, .menuItem:focus svg {
+  fill: white;
+}
+
+.link-body-emphasis:focus, .link-body-emphasis:hover {
+  color: white !important;
+  background-color: #0D6EFD !important;
+}
+
+.menuItem:hover, .menuItem:focus {
+  color: white !important;
+  background-color: #0D6EFD !important;
+}
+
+.dropdown-item {
+  padding: 0 !important;
 }
