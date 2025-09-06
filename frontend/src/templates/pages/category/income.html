@@ -10,7 +10,31 @@
                     Редактировать
                 </button>
             </a>
-            <button type="button" class="btn btn-danger" style="font-size: 14px;">Удалить</button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop" style="font-size: 14px;">
+                Удалить
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                         <div class="modal-body text-center" style="padding: 40px 0; font-size: 20px; ">
+                             Вы действительно хотите удалить категорию?
+                             Связанные доходы останутся без категории.
+                            <div style="margin-top: 20px; ">
+                                <button type="button" class="btn btn-success me-2">Да, удалить</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Не удалять</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
         <div class="cardWidth border rounded-3" >
             <h3 style="margin-bottom: 10px">Зарплата</h3>
