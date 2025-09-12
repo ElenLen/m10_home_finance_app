@@ -1,10 +1,11 @@
-
+import config from "../config/config";
 
 export class AuthUtils {
     static accessTokenKey = 'accessToken';
     static refreshTokenKey = 'refreshToken';
     static userInfoTokenKey = 'userInfo';
 
+    // устанавливает значение
     static  setAuthInfo(accessToken, refreshToken, userInfo = null) {
         localStorage.setItem(this.accessTokenKey, accessToken);
         localStorage.setItem(this.refreshTokenKey, refreshToken);
@@ -14,12 +15,14 @@ export class AuthUtils {
 
     }
 
+    // удаляет значение
     static  removeAuthInfo() {
         localStorage.removeItem(this.accessTokenKey);
         localStorage.removeItem(this.refreshTokenKey);
         localStorage.removeItem(this.userInfoTokenKey);
     }
 
+    // получает значение
     static getAuthInfo(key = null) {
         if (key && [this.accessTokenKey, this.refreshTokenKey, this.userInfoTokenKey].includes(key)) {
             return localStorage.getItem(key);
@@ -37,21 +40,21 @@ export class AuthUtils {
        let result = false;
         const refreshToken = this.getAuthInfo(this.refreshTokenKey);
         if (refreshToken) {
-        //    const response = await fetch(config.api + '/refresh', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-type': 'application/json',
-        //             'Accept': 'application/json',
-        //         },
-        //         body: JSON.stringify({refreshToken: refreshToken}),
-        //     });
-        //    if (response && response.status === 200) {
-        //        const tokens = await response.json();
-        //        if (tokens && !tokens.error) {
-        //            this.setAuthInfo(tokens.accessToken, tokens.refreshToken);
-        //            result = true;
-        //        }
-        //    }
+           const response = await fetch(config.api + '/refresh', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({refreshToken: refreshToken}),
+            });
+           if (response && response.status === 200) {
+               const tokens = await response.json();
+               if (tokens && !tokens.error) {
+                   this.setAuthInfo(tokens.accessToken, tokens.refreshToken);
+                   result = true;
+               }
+           }
         }
         if (!result) {
             this.removeAuthInfo();

@@ -13,7 +13,7 @@
     <h1 class="h1 mb-3 fw-medium text-primary-emphasis" style="font-size: 40px">
         Вход
     </h1>
-
+    <div id="common-error" class="error invalid-feedback text-center mb-3">Не правильный email или пароль</div>
     <form class="text-center" style="width: 397px; max-width: 100%;">
         <div class="d-flex align-items-center flex-column">
             <div class="input-group mb-2">
@@ -25,10 +25,10 @@
                     </svg>
                 </span>
                 <input type="email"
-                       class="form-control " id="email"
+                       class="form-control rounded-end-2" id="email"
                        placeholder="Электронная почта" aria-label="Электронная почта">
                 <span id="email-error"
-                      class="error invalid-feedback">
+                      class="error invalid-feedback text-start">
                     Введите корректный E-mail
                 </span>
             </div>
@@ -42,11 +42,11 @@
                     </svg>
                 </span>
                 <input type="password"
-                       class="form-control "
+                       class="form-control rounded-end-2"
                        id="password" aria-label="Пароль"
                        placeholder="Пароль" >
                 <span id="password-error"
-                      class="error invalid-feedback">
+                      class="error invalid-feedback text-start">
                     Заполните пароль
                 </span>
             </div>
@@ -54,8 +54,8 @@
 
         <div class="form-check text-start mb-3 align-items-center justify-content-center ">
             <input class="form-check-input mt-2" type="checkbox"
-                   value="remember-me" id="flexCheckDefault" style="width: 13px; height: 13px">
-            <label class="form-check-label" for="flexCheckDefault" style="font-size: 12px">
+                    id="remember-me" style="width: 13px; height: 13px">
+            <label class="form-check-label" for="remember-me" style="font-size: 12px">
                 Запомнить меня
             </label>
         </div>

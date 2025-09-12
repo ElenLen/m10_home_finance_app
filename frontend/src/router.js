@@ -11,6 +11,7 @@ import {CreateExpensesCategory} from "./components/category/create-expenses-cate
 import {EditExpensesCategory} from "./components/category/edit-expenses-category";
 import {CreateIncomeExpenses} from "./components/income-expenses/create-income-expenses";
 import {EditIncomeExpenses} from "./components/income-expenses/edit-income-expenses";
+import {AuthUtils} from "./utils/auth-utils";
 
 export class Router {
     constructor() {
@@ -203,11 +204,40 @@ export class Router {
 
 //     активация роутера
     async activateRoute(e, oldRoute = null) {
+        // если найден, удаляем стили
+        if (oldRoute) {
+            const currentRoute = this.routes.find(item => item.route === oldRoute);
+            if (currentRoute.styles && currentRoute.styles.length > 0) {
+                currentRoute.styles.forEach(style => {
+                    document.querySelector(`link[href='/css/${style}']`).remove();
+                })
+            }
+            if (currentRoute.scripts && currentRoute.scripts.length > 0) {
+                currentRoute.scripts.forEach(script => {
+                    document.querySelector(`script[src='/js/${script}']`).remove();
+                })
+            }
+
+            if (currentRoute.unload && typeof currentRoute.unload === 'function') {
+                currentRoute.unload();
+            }
+        }
+
         const urlRoute = window.location.pathname;
         const newRoute = this.routes.find(item => item.route === urlRoute);
         // проверка что стр существует, иначе ошибка
         if (newRoute) {
-
+            if (newRoute.styles && newRoute.styles.length > 0) {
+                newRoute.styles.forEach(style => {
+                    FileUtils.loadPageStyle('/css/' + style, this.adminLteStyleElement);
+                })
+            }
+            if (newRoute.scripts && newRoute.scripts.length > 0) {
+                for (const script of newRoute.scripts) {
+                    // когда выполнится, только после этого перейдем к следующй итерации
+                    await FileUtils.loadPageScript('/js/' + script);
+                }
+            }
             //     проверяем title
             if (newRoute.title) {
                 this.titlePageElement.innerText = newRoute.title;
@@ -219,12 +249,25 @@ export class Router {
                 if (newRoute.useLayout) {
                     this.contentPageElement.innerHTML = await fetch(newRoute.useLayout).then(response => response.text());
                     this.contentPageElement = document.getElementById('content-layout');
-                    // document.body.classList.add('sidebar-mini');
-                    // document.body.classList.add('layout-fixed');
+                    document.body.classList.add('sidebar-mini');
+                    document.body.classList.add('layout-fixed');
 
+                    // если имя уже есть, то не меняем
+                    if (!this.userName) {
+                        let userInfo = AuthUtils.getAuthInfo(AuthUtils.userInfoTokenKey);
+                        if (userInfo) {
+                            userInfo = JSON.parse(userInfo);
+                            if (userInfo.name) {
+                                this.userName = userInfo.name;
+                            }
+                        }
+                    }
+                    // this.profileNameElement.innerText = this.userName;
+                    //
+                    // this.activateMenuItem(newRoute);
                 } else {
-                    // document.body.classList.remove('sidebar-mini');
-                    // document.body.classList.remove('layout-fixed');
+                    document.body.classList.remove('sidebar-mini');
+                    document.body.classList.remove('layout-fixed');
                 }
                 this.contentPageElement.innerHTML = await fetch(newRoute.filePathTemplate).then(response => response.text());
 
@@ -240,6 +283,16 @@ export class Router {
             window.location = '/404';
             await this.activateRoute(null);
         }
-
     }
+    activateMenuItem(route) {
+        document.querySelectorAll('.sidebar .nav-link').forEach(item => {
+            const href = item.getAttribute('href');
+            if ((route.route.includes(href) && href !== '/') || (route.route === '/' && href === '/')) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    }
+
 }

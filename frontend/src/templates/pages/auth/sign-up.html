@@ -10,15 +10,14 @@
             </svg>
         </a>
     </div>
-    <h1 class="mb-3 fw-medium text-primary-emphasis" style="font-size: 40px">
+    <h1 class="mb-3 fw-medium text-primary-emphasis"
+        style="font-size: 40px">
         Создайте аккаунт
     </h1>
-
-
-
+    <div id="common-error" class="error invalid-feedback text-center mb-3">
+        Не удалось зарегистрировать пользователя. Обратитесь в поддержку.
+    </div>
     <form class="text-center" style="width: 397px; max-width: 100%;">
-
-
         <div class="d-flex align-items-center flex-column">
             <div class="input-group mb-2">
                 <span class="input-group-text bg-body-secondary"
@@ -28,10 +27,11 @@
                           fill="#6C757D"/>
                     </svg>
                 </span>
-                <input type="text" class="form-control " id="name"
+                <input type="text" class="form-control rounded-end-2"
+                       id="name"
                        placeholder="Имя" aria-label="Имя">
                 <span id="name-error"
-                      class="error invalid-feedback">
+                      class="error invalid-feedback text-start">
                     Заполните Имя
                 </span>
             </div>
@@ -43,11 +43,12 @@
                           fill="#6C757D"/>
                     </svg>
                 </span>
-                <input type="text" class="form-control" id="last-name"
+                <input type="text" class="form-control rounded-end-2"
+                       id="last-name"
                        aria-label="Фамилия"
                        placeholder="Фамилия">
                 <span id="last-name-error"
-                      class="error invalid-feedback">
+                      class="error invalid-feedback text-start">
                     Заполните Фамилию
                 </span>
             </div>
@@ -61,11 +62,12 @@
                           fill="#6C757D"/>
                     </svg>
                 </span>
-                <input type="email" class="form-control " id="email"
+                <input type="email" class="form-control rounded-end-2"
+                       id="email"
                        placeholder="Электронная почта"
                        aria-label="Электронная почта">
                 <span id="email-error"
-                      class="error invalid-feedback">
+                      class="error invalid-feedback text-start">
                     Введите корректный E-mail
                 </span>
             </div>
@@ -79,11 +81,12 @@
                           fill="#6C757D"/>
                     </svg>
                 </span>
-                <input type="password" class="form-control" id="password"
+                <input type="password" class="form-control rounded-end-2"
+                       id="password"
                        placeholder="Пароль"
                        aria-label="Пароль">
                 <span id="password-error"
-                      class="error invalid-feedback">
+                      class="error invalid-feedback text-start">
                     Заполните пароль
                 </span>
             </div>
@@ -96,15 +99,18 @@
                           fill="#6C757D"/>
                     </svg>
                 </span>
-                <input type="password" class="form-control " id="password-repeat"
+                <input type="password" class="form-control rounded-end-2"
+                       id="password-repeat"
                        placeholder="Подтверждение пароля"
                        aria-label="Подтверждение пароля">
-                <span id="password-repeat-error" class="error invalid-feedback">
+                <span id="password-repeat-error"
+                      class="error invalid-feedback text-start">
                     Пароль и повторение пароля должны совпадать</span>
             </div>
         </div>
 
-        <button class="btn btn-primary w-100 py-2 my-2" type="button" id="process-button">
+        <button class="btn btn-primary w-100 py-2 my-2" type="button"
+                id="process-button">
             Войти
         </button>
         <div class="text-body-secondary " style="font-size: 12px">

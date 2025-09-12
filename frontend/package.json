@@ -4,14 +4,17 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "dev": "webpack serve --open"
+    "dev": "webpack serve --open",
+    "http-server": "http-server ./dist --proxy http://127.0.0.1:8080?",
+    "live-server": "live-server ./dist --entry-file=index.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "bootstrap": "^5.3.3"
+    "bootstrap": "^5.3.3",
+    "dotenv-webpack": "^8.1.1"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^13.0.1",
