@@ -6,7 +6,9 @@ export class Logout {
         this.openNewRoute = openNewRoute;
 
         if (!AuthUtils.getAuthInfo(AuthUtils.accessTokenKey)
-            || !AuthUtils.getAuthInfo(AuthUtils.refreshTokenKey)) {
+            || !AuthUtils.getAuthInfo(AuthUtils.refreshTokenKey)
+        ) {
+            AuthUtils.removeAuthInfo();
             return this.openNewRoute('/login');
         }
 
@@ -19,7 +21,6 @@ export class Logout {
         });
 
         AuthUtils.removeAuthInfo();
-
         //     перевод на гл стр
         this.openNewRoute('/login');
     }

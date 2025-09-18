@@ -1,21 +1,39 @@
-.menuItem:focus-within svg {
-  //transform: rotate(90deg);
+.nav-link {
+  color: #052C65;
 }
 
-.menuItem:hover svg, .menuItem:focus svg {
-  fill: white;
+.nav-link svg {
+  fill: #052C65;
 }
 
-.link-body-emphasis:focus, .link-body-emphasis:hover {
+.nav-link.active {
   color: white !important;
   background-color: #0D6EFD !important;
 }
 
-.menuItem:hover, .menuItem:focus {
+.nav-link.active svg, .nav-link:focus svg, .nav-link:hover svg {
+  fill: white;
+}
+
+.nav-link:focus, .nav-link:hover {
   color: white !important;
   background-color: #0D6EFD !important;
 }
 
 .dropdown-item {
   padding: 0 !important;
+}
+
+#aside {
+  position: fixed;
+  width: 230px;
+  padding: 0 !important;
+  height: 100vh;
+  overflow-y: hidden;
+  z-index: 1038;
+}
+
+.active {
+  color: white ;
+  background-color: #0D6EFD ;
 }

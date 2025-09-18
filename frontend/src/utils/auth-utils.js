@@ -6,13 +6,19 @@ export class AuthUtils {
     static userInfoTokenKey = 'userInfo';
 
     // устанавливает значение
-    static  setAuthInfo(accessToken, refreshToken, userInfo = null) {
+    static  setAuthInfo(accessToken, refreshToken , userInfo = null) {
         localStorage.setItem(this.accessTokenKey, accessToken);
         localStorage.setItem(this.refreshTokenKey, refreshToken);
         if (userInfo){
             localStorage.setItem(this.userInfoTokenKey, JSON.stringify(userInfo));
         }
+    }
 
+    // устанавливает значение для нового пользоватедя без токена
+    static  setAuthInfoNew(userInfo) {
+        if (userInfo){
+            localStorage.setItem(this.userInfoTokenKey, JSON.stringify(userInfo));
+        }
     }
 
     // удаляет значение

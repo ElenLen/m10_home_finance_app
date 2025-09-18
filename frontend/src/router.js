@@ -29,7 +29,16 @@ export class Router {
                 useLayout: '/templates/layout.html',
                 // загрузка js
                 load: () => {
-                    new Home(this.openNewRoute.bind(this));
+                    if (!localStorage.getItem('userInfo')) {
+                        return this.openNewRoute('/login');
+                    } else {
+                        document.body.classList.remove('login-page');
+                        document.body.classList.add('d-flex');
+                        document.body.classList.remove('align-items-center');
+                        document.body.classList.remove('container');
+                        document.body.classList.remove('justify-content-center');
+                        new Home(this.openNewRoute.bind(this));
+                    }
                 },
             },
             {
@@ -39,7 +48,11 @@ export class Router {
                 useLayout: '/templates/layout.html',
                 // загрузка js
                 load: () => {
-                    new IncomeExpenses(this.openNewRoute.bind(this));
+                    if (!localStorage.getItem('userInfo')) {
+                        return this.openNewRoute('/login');
+                    } else {
+                        new IncomeExpenses(this.openNewRoute.bind(this));
+                    }
                 },
             },
             {
@@ -49,7 +62,11 @@ export class Router {
                 useLayout: '/templates/layout.html',
                 // загрузка js
                 load: () => {
-                    new CreateIncomeExpenses(this.openNewRoute.bind(this));
+                    if (!localStorage.getItem('userInfo')) {
+                        return this.openNewRoute('/login');
+                    } else {
+                        new CreateIncomeExpenses(this.openNewRoute.bind(this));
+                    }
                 },
             },
             {
@@ -59,7 +76,11 @@ export class Router {
                 useLayout: '/templates/layout.html',
                 // загрузка js
                 load: () => {
-                    new EditIncomeExpenses(this.openNewRoute.bind(this));
+                    if (!localStorage.getItem('userInfo')) {
+                        return this.openNewRoute('/login');
+                    } else {
+                        new EditIncomeExpenses(this.openNewRoute.bind(this));
+                    }
                 },
             },
             {
@@ -68,7 +89,11 @@ export class Router {
                 filePathTemplate: '/templates/pages/category/income.html',
                 useLayout: '/templates/layout.html',
                 load: () => {
-                    new Income(this.openNewRoute.bind(this));
+                    if (!localStorage.getItem('userInfo')) {
+                        return this.openNewRoute('/login');
+                    } else {
+                        new Income(this.openNewRoute.bind(this));
+                    }
                 },
 
             },
@@ -78,7 +103,11 @@ export class Router {
                 filePathTemplate: '/templates/pages/category/expenses.html',
                 useLayout: '/templates/layout.html',
                 load: () => {
-                    new Expenses(this.openNewRoute.bind(this));
+                    if (!localStorage.getItem('userInfo')) {
+                        return this.openNewRoute('/login');
+                    } else {
+                        new Expenses(this.openNewRoute.bind(this));
+                    }
                 },
             },
             {
@@ -87,7 +116,11 @@ export class Router {
                 filePathTemplate: '/templates/pages/category/create-income-category.html',
                 useLayout: '/templates/layout.html',
                 load: () => {
-                    new CreateIncomeCategory(this.openNewRoute.bind(this));
+                    if (!localStorage.getItem('userInfo')) {
+                        return this.openNewRoute('/login');
+                    } else {
+                        new CreateIncomeCategory(this.openNewRoute.bind(this));
+                    }
                 },
             },
             {
@@ -96,7 +129,11 @@ export class Router {
                 filePathTemplate: '/templates/pages/category/create-expenses-category.html',
                 useLayout: '/templates/layout.html',
                 load: () => {
-                    new CreateExpensesCategory(this.openNewRoute.bind(this));
+                    if (!localStorage.getItem('userInfo')) {
+                        return this.openNewRoute('/login');
+                    } else {
+                        new CreateExpensesCategory(this.openNewRoute.bind(this));
+                    }
                 },
             },
             {
@@ -105,7 +142,11 @@ export class Router {
                 filePathTemplate: '/templates/pages/category/edit-income-category.html',
                 useLayout: '/templates/layout.html',
                 load: () => {
-                    new EditIncomeCategory(this.openNewRoute.bind(this));
+                    if (!localStorage.getItem('userInfo')) {
+                        return this.openNewRoute('/login');
+                    } else {
+                        new EditIncomeCategory(this.openNewRoute.bind(this));
+                    }
                 },
             },
             {
@@ -114,7 +155,11 @@ export class Router {
                 filePathTemplate: '/templates/pages/category/edit-expenses-category.html',
                 useLayout: '/templates/layout.html',
                 load: () => {
-                    new EditExpensesCategory(this.openNewRoute.bind(this));
+                    if (!localStorage.getItem('userInfo')) {
+                        return this.openNewRoute('/login');
+                    } else {
+                        new EditExpensesCategory(this.openNewRoute.bind(this));
+                    }
                 },
             },
             {
@@ -151,7 +196,6 @@ export class Router {
                     document.body.classList.remove('login-page');
                     document.body.style.height = 'auto';
                 },
-                // styles: ['icheck-bootstrap.min.css']
             },
             {
                 route: '/sign-up',
@@ -177,7 +221,7 @@ export class Router {
             {
                 route: '/logout',
                 load: () => {
-                    document.body.style.height = 'auto';
+                    // document.body.style.height = 'auto';
                     new Logout(this.openNewRoute.bind(this));
                 }
             }
@@ -190,7 +234,8 @@ export class Router {
         window.addEventListener('DOMContentLoaded', this.activateRoute.bind(this))
         // когда поменялся url стр
         window.addEventListener('popstate', this.activateRoute.bind(this))
-
+//     отслеживаем любой клик
+        document.addEventListener('click', this.clickHandler.bind(this));
     }
 
     async openNewRoute(url) {
@@ -200,6 +245,28 @@ export class Router {
         history.pushState({}, '', url);
         //чтобы взял адрес из адресной стрки и обработал
         await this.activateRoute(null, currentRoute);
+    }
+
+    // для загрузки нового роута
+    async clickHandler(e) {
+        // A-ссылка
+        let element = null;
+        if (e.target.nodeName === 'A') {
+            element = e.target;
+        } else if (e.target.parentNode.nodeName === 'A') {
+            element = e.target.parentNode;
+        }
+        if (element) {
+            e.preventDefault();
+            // определяем какая стр открыта
+            const currentRoute = window.location.pathname;
+            const url = element.href.replace(window.location.origin, '');
+            // проверяем и завершаем при необходимости
+            if (!url || currentRoute === url.replace('#', '') || url.startsWith('javascript:void(0)')) {
+                return;
+            }
+            await this.openNewRoute(url);
+        }
     }
 
 //     активация роутера
@@ -223,7 +290,9 @@ export class Router {
             }
         }
 
+        // определяем какая стр открыта
         const urlRoute = window.location.pathname;
+        //     см какому адресу сотв текущий url, кот отобр пользователю
         const newRoute = this.routes.find(item => item.route === urlRoute);
         // проверка что стр существует, иначе ошибка
         if (newRoute) {
@@ -248,9 +317,12 @@ export class Router {
                 // проверяем использ лайаута
                 if (newRoute.useLayout) {
                     this.contentPageElement.innerHTML = await fetch(newRoute.useLayout).then(response => response.text());
-                    this.contentPageElement = document.getElementById('content-layout');
-                    document.body.classList.add('sidebar-mini');
-                    document.body.classList.add('layout-fixed');
+                    contentBlock = document.getElementById('content-layout');
+                    // document.body.classList.add('sidebar-mini');
+                    // document.body.classList.add('layout-fixed');
+
+                    // фио авторизованного пользователя
+                    this.profileNameElement = document.getElementById('profile-name');
 
                     // если имя уже есть, то не меняем
                     if (!this.userName) {
@@ -262,14 +334,14 @@ export class Router {
                             }
                         }
                     }
-                    // this.profileNameElement.innerText = this.userName;
-                    //
-                    // this.activateMenuItem(newRoute);
+                    this.profileNameElement.innerText = this.userName;
+
+                    this.activateMenuItem(newRoute);
                 } else {
-                    document.body.classList.remove('sidebar-mini');
-                    document.body.classList.remove('layout-fixed');
+                    // document.body.classList.remove('sidebar-mini');
+                    // document.body.classList.remove('layout-fixed');
                 }
-                this.contentPageElement.innerHTML = await fetch(newRoute.filePathTemplate).then(response => response.text());
+                contentBlock.innerHTML = await fetch(newRoute.filePathTemplate).then(response => response.text());
 
             }
 
@@ -284,14 +356,38 @@ export class Router {
             await this.activateRoute(null);
         }
     }
+
     activateMenuItem(route) {
         document.querySelectorAll('.sidebar .nav-link').forEach(item => {
             const href = item.getAttribute('href');
-            if ((route.route.includes(href) && href !== '/') || (route.route === '/' && href === '/')) {
+            const categories = document.getElementById('categories');
+            const homeCollapse = document.getElementById('home-collapse');
+            const borderCategories = document.getElementById('border-categories');
+
+            const income = document.getElementById('income');
+            const expenses = document.getElementById('expenses');
+            const svgCategories = document.getElementById('svg-categories');
+
+            if ((route.route === href)) {
                 item.classList.add('active');
             } else {
                 item.classList.remove('active');
             }
+
+            //     если категории
+            if ((href === '/income' && income.classList.contains('active'))
+                || (href === '/expenses' && expenses.classList.contains('active'))
+            ) {
+                categories.classList.add('active');
+                homeCollapse.classList.add('show');
+                borderCategories.classList.add('border-primary');
+                svgCategories.style.transform = 'rotate(90deg)';
+            } else {
+                categories.classList.remove('active');
+                homeCollapse.classList.remove('show');
+                borderCategories.classList.remove('border-primary');
+            }
+
         });
     }
 

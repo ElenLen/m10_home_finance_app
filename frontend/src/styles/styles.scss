@@ -1,5 +1,22 @@
+@import url("./layout.scss");
+
+*{
+  //border: 1px solid red;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  //width: 100% ;
+}
+
+#content {
+  height: 100%;
+}
+
 .cardWidth {
   width: 350px;
   height: 121px;
   padding: 20px;
 }
+

@@ -7,9 +7,14 @@ export class Login {
     constructor(openNewRoute) {
         this.openNewRoute = openNewRoute;
 
-        if (AuthUtils.getAuthInfo(AuthUtils.accessTokenKey)) {
+        // если есть токен в локал сторедж, то перебрасываем на главную
+        if (localStorage.getItem('userInfo') ) {
             return this.openNewRoute('/');
         }
+
+        // if (AuthUtils.getAuthInfo(AuthUtils.accessTokenKey)) {
+        //     return this.openNewRoute('/');
+        // }
 
         this.findElements();
 
@@ -50,52 +55,26 @@ export class Login {
         this.commonErrorElement.style.display = 'none';
 
         if (this.validateForm()) {
-            const result = await HttpUtils.request('/login', 'POST', {
+            // отправляем
+            const loginResult = await AuthService.logIn({
                 email: this.emailElement.value,
                 password: this.passwordElement.value,
                 rememberMe: this.rememberMeElement.checked
-            })
-
-            if (result.error || !result.response || (result.response &&
-                (!result.response.tokens.accessToken || !result.response.tokens.refreshToken ||
-                    !result.response.user.id ||
-                    !result.response.user.name || !result.response.user.lastName))) {
-                this.commonErrorElement.style.display = 'block';
-                return;
-            }
-
-            AuthUtils.setAuthInfo(result.response.tokens.accessToken, result.response.tokens.refreshToken, {
-                id: result.response.user.id,
-                name: result.response.user.name,
-                lastName: result.response.user.lastName
             });
 
-            this.openNewRoute('/');
+            // получаем
+            if (loginResult) {
+                AuthUtils.setAuthInfo(loginResult.tokens.accessToken,
+                    loginResult.tokens.refreshToken,
+                    {
+                        id: loginResult.user.id,
+                        name: loginResult.user.name,
+                        lastName: loginResult.user.lastName
+                    }
+                );
+                return this.openNewRoute('/');
+            }
+            this.commonErrorElement.style.display = 'block';
         }
-
-        //
-        // if (ValidationUtils.validateForm(this.validations)) {
-        //
-        //     const loginResult = await AuthService.logIn({
-        //         email: this.emailElement.value,
-        //         password: this.passwordElement.value,
-        //         rememberMe: this.rememberMeElement.checked
-        //     });
-        //
-        //     if (loginResult) {
-        //
-        //         AuthUtils.setAuthInfo(loginResult.accessToken, loginResult.refreshToken, {
-        //             id: loginResult.id,
-        //             name: loginResult.name,
-        //             lastName: loginResult.lastName
-        //         });
-        //
-        //         //     перевод на гл стр
-        //         return this.openNewRoute('/');
-        //     }
-        //
-        //     this.commonErrorElement.style.display = 'block';
-        // }
-
     }
 }
