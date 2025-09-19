@@ -9,7 +9,7 @@ export class Home {
         const ctx = document.getElementById('myChart');
         const ctx2 = document.getElementById('myChart2');
 
-        new Chart(ctx, {
+        const myChart = new Chart(ctx, {
             type: 'pie',
             data: {
                 labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue'],
@@ -46,7 +46,8 @@ export class Home {
         });
 
 
-        new Chart(ctx2, {
+        const myChart2 = new Chart(ctx2,
+            {
             type: 'pie',
             data: {
                 labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue'],

@@ -1,10 +1,14 @@
 import {AuthUtils} from "../../utils/auth-utils";
+import {AuthService} from "../../services/auth-service";
 
 export class Logout {
     constructor(openNewRoute) {
         this.openNewRoute = openNewRoute;
 
-        if (!AuthUtils.getAuthInfo(AuthUtils.accessTokenKey) || !AuthUtils.getAuthInfo(AuthUtils.refreshTokenKey)) {
+        if (!AuthUtils.getAuthInfo(AuthUtils.accessTokenKey)
+            || !AuthUtils.getAuthInfo(AuthUtils.refreshTokenKey)
+        ) {
+            AuthUtils.removeAuthInfo();
             return this.openNewRoute('/login');
         }
 
@@ -12,12 +16,11 @@ export class Logout {
     }
 
     async logout() {
-        // await AuthService.logOut({
-        //     refreshToken: AuthUtils.getAuthInfo(AuthUtils.refreshTokenKey),
-        // });
-        //
-        // AuthUtils.removeAuthInfo();
+        await AuthService.logOut({
+            refreshToken: AuthUtils.getAuthInfo(AuthUtils.refreshTokenKey),
+        });
 
+        AuthUtils.removeAuthInfo();
         //     перевод на гл стр
         this.openNewRoute('/login');
     }
