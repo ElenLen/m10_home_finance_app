@@ -19,10 +19,10 @@ export class AuthService {
         const result = await HttpUtils.request('/signup', 'POST', false, data);
         if (result.error || !result.response ||
             (result.response &&
-            (!result.response.user.id ||
-                !result.response.user.email ||
-                !result.response.user.name ||
-                !result.response.user.lastName))) {
+                (!result.response.user.id ||
+                    !result.response.user.email ||
+                    !result.response.user.name ||
+                    !result.response.user.lastName))) {
             return;
         }
         return result.response;

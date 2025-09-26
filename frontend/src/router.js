@@ -12,11 +12,15 @@ import {EditExpensesCategory} from "./components/category/edit-expenses-category
 import {CreateIncomeExpenses} from "./components/income-expenses/create-income-expenses";
 import {EditIncomeExpenses} from "./components/income-expenses/edit-income-expenses";
 import {AuthUtils} from "./utils/auth-utils";
+import {BalanceService} from "./services/balance-service";
 
 export class Router {
     constructor() {
         this.titlePageElement = document.getElementById('title');
         this.contentPageElement = document.getElementById('content');
+        this.userName = null;
+        // this.getBalance().then();
+        this.userBalance = 0;
 
         this.initEvents();
         //     каждый объект- своя стр
@@ -38,127 +42,6 @@ export class Router {
                         document.body.classList.remove('container');
                         document.body.classList.remove('justify-content-center');
                         new Home(this.openNewRoute.bind(this));
-                    }
-                },
-            },
-            {
-                route: '/income-expenses',
-                title: 'Доходы и расходы',
-                filePathTemplate: '/templates/pages/income-expenses/income-expenses.html',
-                useLayout: '/templates/layout.html',
-                // загрузка js
-                load: () => {
-                    if (!localStorage.getItem('userInfo')) {
-                        return this.openNewRoute('/login');
-                    } else {
-                        new IncomeExpenses(this.openNewRoute.bind(this));
-                    }
-                },
-            },
-            {
-                route: '/create-income-expenses',
-                title: 'Создание дохода/расхода',
-                filePathTemplate: '/templates/pages/income-expenses/create-income-expenses.html',
-                useLayout: '/templates/layout.html',
-                // загрузка js
-                load: () => {
-                    if (!localStorage.getItem('userInfo')) {
-                        return this.openNewRoute('/login');
-                    } else {
-                        new CreateIncomeExpenses(this.openNewRoute.bind(this));
-                    }
-                },
-            },
-            {
-                route: '/edit-income-expenses',
-                title: 'Редактирование дохода/расхода',
-                filePathTemplate: '/templates/pages/income-expenses/edit-income-expenses.html',
-                useLayout: '/templates/layout.html',
-                // загрузка js
-                load: () => {
-                    if (!localStorage.getItem('userInfo')) {
-                        return this.openNewRoute('/login');
-                    } else {
-                        new EditIncomeExpenses(this.openNewRoute.bind(this));
-                    }
-                },
-            },
-            {
-                route: '/income',
-                title: 'Доходы',
-                filePathTemplate: '/templates/pages/category/income.html',
-                useLayout: '/templates/layout.html',
-                load: () => {
-                    if (!localStorage.getItem('userInfo')) {
-                        return this.openNewRoute('/login');
-                    } else {
-                        new Income(this.openNewRoute.bind(this));
-                    }
-                },
-
-            },
-            {
-                route: '/expenses',
-                title: 'Расходы',
-                filePathTemplate: '/templates/pages/category/expenses.html',
-                useLayout: '/templates/layout.html',
-                load: () => {
-                    if (!localStorage.getItem('userInfo')) {
-                        return this.openNewRoute('/login');
-                    } else {
-                        new Expenses(this.openNewRoute.bind(this));
-                    }
-                },
-            },
-            {
-                route: '/create-income',
-                title: 'Создание категории доходов',
-                filePathTemplate: '/templates/pages/category/create-income-category.html',
-                useLayout: '/templates/layout.html',
-                load: () => {
-                    if (!localStorage.getItem('userInfo')) {
-                        return this.openNewRoute('/login');
-                    } else {
-                        new CreateIncomeCategory(this.openNewRoute.bind(this));
-                    }
-                },
-            },
-            {
-                route: '/create-expenses',
-                title: 'Создание категории расходов',
-                filePathTemplate: '/templates/pages/category/create-expenses-category.html',
-                useLayout: '/templates/layout.html',
-                load: () => {
-                    if (!localStorage.getItem('userInfo')) {
-                        return this.openNewRoute('/login');
-                    } else {
-                        new CreateExpensesCategory(this.openNewRoute.bind(this));
-                    }
-                },
-            },
-            {
-                route: '/edit-income',
-                title: 'Редактирование категории доходов',
-                filePathTemplate: '/templates/pages/category/edit-income-category.html',
-                useLayout: '/templates/layout.html',
-                load: () => {
-                    if (!localStorage.getItem('userInfo')) {
-                        return this.openNewRoute('/login');
-                    } else {
-                        new EditIncomeCategory(this.openNewRoute.bind(this));
-                    }
-                },
-            },
-            {
-                route: '/edit-expenses',
-                title: 'Редактирование категории расходов',
-                filePathTemplate: '/templates/pages/category/edit-expenses-category.html',
-                useLayout: '/templates/layout.html',
-                load: () => {
-                    if (!localStorage.getItem('userInfo')) {
-                        return this.openNewRoute('/login');
-                    } else {
-                        new EditExpensesCategory(this.openNewRoute.bind(this));
                     }
                 },
             },
@@ -224,9 +107,129 @@ export class Router {
                     // document.body.style.height = 'auto';
                     new Logout(this.openNewRoute.bind(this));
                 }
+            },
+            {
+                route: '/income-expenses',
+                title: 'Доходы и расходы',
+                filePathTemplate: '/templates/pages/income-expenses/income-expenses.html',
+                useLayout: '/templates/layout.html',
+                // загрузка js
+                load: () => {
+                    if (!localStorage.getItem('userInfo')) {
+                        return this.openNewRoute('/login');
+                    } else {
+                        new IncomeExpenses(this.openNewRoute.bind(this));
+                    }
+                },
+            },
+            {
+                route: '/create-income-expenses',
+                title: 'Создание дохода/расхода',
+                filePathTemplate: '/templates/pages/income-expenses/create-income-expenses.html',
+                useLayout: '/templates/layout.html',
+                // загрузка js
+                load: () => {
+                    if (!localStorage.getItem('userInfo')) {
+                        return this.openNewRoute('/login');
+                    } else {
+                        new CreateIncomeExpenses(this.openNewRoute.bind(this));
+                    }
+                },
+            },
+            {
+                route: '/edit-income-expenses',
+                title: 'Редактирование дохода/расхода',
+                filePathTemplate: '/templates/pages/income-expenses/edit-income-expenses.html',
+                useLayout: '/templates/layout.html',
+                // загрузка js
+                load: () => {
+                    if (!localStorage.getItem('userInfo')) {
+                        return this.openNewRoute('/login');
+                    } else {
+                        new EditIncomeExpenses(this.openNewRoute.bind(this));
+                    }
+                },
+            },
+            {
+                route: '/income',
+                title: 'Доходы',
+                filePathTemplate: '/templates/pages/category/income.html',
+                useLayout: '/templates/layout.html',
+                load: () => {
+                    if (!localStorage.getItem('userInfo')) {
+                        return this.openNewRoute('/login');
+                    } else {
+                        new Income(this.openNewRoute.bind(this));
+                    }
+                },
+
+            },
+            {
+                route: '/create-income',
+                title: 'Создание категории доходов',
+                filePathTemplate: '/templates/pages/category/create-income-category.html',
+                useLayout: '/templates/layout.html',
+                load: () => {
+                    if (!localStorage.getItem('userInfo')) {
+                        return this.openNewRoute('/login');
+                    } else {
+                        new CreateIncomeCategory(this.openNewRoute.bind(this));
+                    }
+                },
+            },
+            {
+                route: '/edit-income',
+                title: 'Редактирование категории доходов',
+                filePathTemplate: '/templates/pages/category/edit-income-category.html',
+                useLayout: '/templates/layout.html',
+                load: () => {
+                    if (!localStorage.getItem('userInfo')) {
+                        return this.openNewRoute('/login');
+                    } else {
+                        new EditIncomeCategory(this.openNewRoute.bind(this));
+                    }
+                },
+            },
+            {
+                route: '/expenses',
+                title: 'Расходы',
+                filePathTemplate: '/templates/pages/category/expenses.html',
+                useLayout: '/templates/layout.html',
+                load: () => {
+                    if (!localStorage.getItem('userInfo')) {
+                        return this.openNewRoute('/login');
+                    } else {
+                        new Expenses(this.openNewRoute.bind(this));
+                    }
+                },
+            },
+            {
+                route: '/create-expenses',
+                title: 'Создание категории расходов',
+                filePathTemplate: '/templates/pages/category/create-expenses-category.html',
+                useLayout: '/templates/layout.html',
+                load: () => {
+                    if (!localStorage.getItem('userInfo')) {
+                        return this.openNewRoute('/login');
+                    } else {
+                        new CreateExpensesCategory(this.openNewRoute.bind(this));
+                    }
+                },
+            },
+            {
+                route: '/edit-expenses',
+                title: 'Редактирование категории расходов',
+                filePathTemplate: '/templates/pages/category/edit-expenses-category.html',
+                useLayout: '/templates/layout.html',
+                load: () => {
+                    if (!localStorage.getItem('userInfo')) {
+                        return this.openNewRoute('/login');
+                    } else {
+                        new EditExpensesCategory(this.openNewRoute.bind(this));
+                    }
+                },
             }
         ]
-
     }
 
     initEvents() {
@@ -335,6 +338,29 @@ export class Router {
                         }
                     }
                     this.profileNameElement.innerText = this.userName;
+
+                    // подгрузка баланса balance
+                    // async getBalance() {
+                    const response = await BalanceService.getBalance();
+
+                    if (response.error) {
+                        alert(response.error);
+                        // return response.redirect ? this.openNewRoute(response.redirect) : null;
+                    } else {
+                        this.balanceElement = document.getElementById('balance');
+                        if (response.balance) {
+                            this.userBalance = response.balance;
+                        }
+                        this.balanceElement.innerText = `${this.userBalance}$`;
+                    }
+
+                    // this.loadBalanceInfo(response.balance);
+                    // }
+
+                    // loadBalanceInfo(balance) {
+
+                    // }
+
 
                     this.activateMenuItem(newRoute);
                 } else {

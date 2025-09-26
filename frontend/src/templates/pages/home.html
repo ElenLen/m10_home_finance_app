@@ -3,31 +3,38 @@
         Главная
     </h1>
     <section class="content">
-        <div class="interval" style="margin-bottom: 140px">
+        <div class="interval"
+             style="display: flex; margin-bottom: 140px; flex-wrap: wrap; align-items: center; row-gap: 10px;">
             <button class="btn btn-outline-secondary active" style="margin-right: 20px; width: 100px;">Сегодня</button>
             <button class="btn btn-outline-secondary" style="margin-right: 20px; width: 100px;">Неделя</button>
             <button class="btn btn-outline-secondary" style="margin-right: 20px; width: 100px;">Месяц</button>
             <button class="btn btn-outline-secondary" style="margin-right: 20px; width: 100px;">Год</button>
             <button class="btn btn-outline-secondary" style="margin-right: 20px; width: 100px;">Все</button>
             <button class="btn btn-outline-secondary" style="margin-right: 20px; width: 100px;">Интервал</button>
-            <label for="date-start">
+            <label for="date-start" style="margin-right: 20px;">
                 с
-                <input type="date" name="date-start" id="date-start" class="border-0 text-secondary">
+                <input type="date" name="date-start" id="date-start" class="border-0 text-secondary"
+                       style="display: inline-block; width: 120px;">
             </label>
-            <label for="date-end">
+            <label for="date-end" style="margin-right: 20px;">
                 по
-                <input type="date" name="date-end" id="date-end" class="border-0 text-secondary">
+                <input type="date" name="date-end" id="date-end" class="border-0 text-secondary"
+                       style="display: inline-block; width: 120px;">
             </label>
         </div>
         <div class="schedule d-flex justify-content-start w-auto">
-            <div class="w-50" style="max-width: 450px">
+            <div class="w-50" style="max-width: 450px; height: 400px;">
                 <h2 class="h2 text-center" style="color: #290661; font-size: 28px;">Доходы</h2>
-                <canvas id="myChart"  ></canvas>
+                <div style="height: 350px;">
+                    <canvas id="myChart" width="400" height="350"></canvas>
+                </div>
             </div>
             <div class="vr" style="margin: 0 84px"></div>
-            <div class="w-50" style="max-width: 450px">
+            <div class="w-50" style="max-width: 450px; height: 400px;">
                 <h2 class="h2 text-center" style="color: #290661; font-size: 28px;">Расходы</h2>
-                <canvas id="myChart2" ></canvas>
+                <div style="height: 350px;">
+                    <canvas id="myChart2" width="400" height="350"></canvas>
+                </div>
             </div>
         </div>
     </section>

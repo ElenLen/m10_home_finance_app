@@ -1,11 +1,4 @@
 <div class="wrapper d-flex ">
-    <!--     flex-nowrap w-auto-->
-
-    <!-- Navbar -->
-    <!--    <nav class="main-header navbar navbar-expand navbar-white navbar-light">-->
-    <!--    </nav>-->
-    <!-- /.navbar -->
-
     <!-- Main Sidebar Container -->
     <aside class="sidebar d-flex flex-column flex-shrink-0 bg-body-tertiary border-end vh-100" id="aside">
         <a href="javascript:void(0)" class="d-flex align-items-center  text-decoration-none"
@@ -64,15 +57,16 @@
                             w-100 text-start justify-content-between collapsed
                              icon-link icon-link-hover   "
                        style="--bs-icon-link-transform: rotate(90deg);"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#home-collapse"
-                            aria-controls="home-collapse"
-                            aria-expanded="false"
-                            aria-label="Категории"
-                            id="categories">
+                       type="button"
+                       data-bs-toggle="collapse"
+                       data-bs-target="#home-collapse"
+                       aria-controls="home-collapse"
+                       aria-expanded="false"
+                       aria-label="Категории"
+                       id="categories">
                         Категории
-                        <svg id="svg-categories" class="bi" aria-hidden="true" width="7" height="14" viewBox="0 0 7 14" fill="#052C65">
+                        <svg id="svg-categories" class="bi" aria-hidden="true" width="7" height="14" viewBox="0 0 7 14"
+                             fill="#052C65">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                   d="M0.145063 13.3539C0.051021 13.2601 -0.00183105 13.1327 -0.00183105 12.9999C-0.00183105 12.867 0.051021 12.7397 0.145063 12.6459L5.79206 6.99987L0.145063 1.35387C0.0185907 1.2274 -0.0308022 1.04306 0.0154897 0.8703C0.0617817 0.697536 0.196726 0.562593 0.36949 0.5163C0.542254 0.470008 0.726591 0.519401 0.853063 0.645873L6.85306 6.64587C6.9471 6.73968 6.99996 6.86705 6.99996 6.99987C6.99996 7.1327 6.9471 7.26007 6.85306 7.35387L0.853063 13.3539C0.759259 13.4479 0.63189 13.5008 0.499063 13.5008C0.366235 13.5008 0.238867 13.4479 0.145063 13.3539Z"/>
                         </svg>
@@ -103,12 +97,10 @@
                     </div>
                 </div>
             </li>
-
         </ul>
 
-
         <div class="text-primary-emphasis fw-medium" style="margin: 0 0 4px 20px; font-size: 14px">
-            Баланс: <span class="text-primary">500$</span>
+            Баланс: <span class="text-primary" id="balance">$</span>
         </div>
         <hr>
 
@@ -122,7 +114,7 @@
                     <path d="M18 18C19.0609 18 20.0783 17.5786 20.8284 16.8284C21.5786 16.0783 22 15.0609 22 14C22 12.9391 21.5786 11.9217 20.8284 11.1716C20.0783 10.4214 19.0609 10 18 10C16.9391 10 15.9217 10.4214 15.1716 11.1716C14.4214 11.9217 14 12.9391 14 14C14 15.0609 14.4214 16.0783 15.1716 16.8284C15.9217 17.5786 16.9391 18 18 18ZM20.6667 14C20.6667 14.7072 20.3857 15.3855 19.8856 15.8856C19.3855 16.3857 18.7072 16.6667 18 16.6667C17.2928 16.6667 16.6145 16.3857 16.1144 15.8856C15.6143 15.3855 15.3333 14.7072 15.3333 14C15.3333 13.2928 15.6143 12.6145 16.1144 12.1144C16.6145 11.6143 17.2928 11.3333 18 11.3333C18.7072 11.3333 19.3855 11.6143 19.8856 12.1144C20.3857 12.6145 20.6667 13.2928 20.6667 14ZM26 24.6667C26 26 24.6667 26 24.6667 26H11.3333C11.3333 26 10 26 10 24.6667C10 23.3333 11.3333 19.3333 18 19.3333C24.6667 19.3333 26 23.3333 26 24.6667ZM24.6667 24.6613C24.6653 24.3333 24.4613 23.3467 23.5573 22.4427C22.688 21.5733 21.052 20.6667 18 20.6667C14.9467 20.6667 13.312 21.5733 12.4427 22.4427C11.5387 23.3467 11.336 24.3333 11.3333 24.6613H24.6667Z"
                           fill="#6C757D"/>
                 </svg>
-                <strong class="text-primary-emphasis fw-normal" style="font-size: 14px; " id="profile-name">Roman Chernov</strong>
+                <strong class="text-primary-emphasis fw-normal" style="font-size: 14px; " id="profile-name"></strong>
             </a>
             <ul class="dropdown-menu text-small shadow px-3">
                 <li><a class="dropdown-item" href="/logout">Sign out</a></li>
@@ -130,10 +122,8 @@
         </div>
     </aside>
 
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper " id="content-layout" style="margin: 100px 60px 100px 280px">
-        <!--w-100    -->
     </div>
 
     <!--    <footer class="main-footer">-->

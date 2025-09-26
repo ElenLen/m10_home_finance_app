@@ -3,7 +3,6 @@ import {AuthUtils} from "./auth-utils";
 
 export class HttpUtils {
     static async request(url, method = 'GET', useAuth = true, body = null) {
-    // static async request(url, method = 'GET', body = null) {
         const result = {
             error: false,
             response: null
@@ -19,11 +18,9 @@ export class HttpUtils {
         let token = null;
         if (useAuth) {
             token = AuthUtils.getAuthInfo(AuthUtils.accessTokenKey);
-            if (token) {
-                params.headers['authorization'] = token;
-            }
-
+            params.headers['x-auth-token'] = token;
         }
+
         if (body) {
             params.body = JSON.stringify(body);
         }
@@ -48,9 +45,9 @@ export class HttpUtils {
                     //     2-токен устарел/невалидный (надо обновить)
                     const updateTokenResult = await AuthUtils.updateRefreshToken();
                     if (updateTokenResult) {
-                    //     запрос повторно
+                        //     запрос повторно
                         return this.request(url, method, useAuth, body);
-                    }else {
+                    } else {
                         result.redirect = '/login';
                     }
                 }
