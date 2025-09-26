@@ -6,8 +6,7 @@ export class SignUp {
         this.openNewRoute = openNewRoute;
 
         // если есть токен в локал сторедж, то перебрасываем на главную
-        if (localStorage.getItem('accessToken') ||
-            localStorage.getItem('userInfo')) {
+        if (localStorage.getItem('accessToken')) {
             return this.openNewRoute('/');
         }
 
@@ -87,7 +86,8 @@ export class SignUp {
                     name: signupResult.user.name,
                     lastName: signupResult.user.lastName,
                 });
-                this.openNewRoute('/');
+                // если регистрация успешна, перекидываем на стр логина
+                this.openNewRoute('/login');
             }
             this.commonErrorElement.style.display = 'block';
         }

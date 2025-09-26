@@ -6,7 +6,7 @@ export class Login {
         this.openNewRoute = openNewRoute;
 
         // если есть токен в локал сторедж, то перебрасываем на главную
-        if (localStorage.getItem('userInfo')) {
+        if (localStorage.getItem('accessToken')) {
             return this.openNewRoute('/');
         }
 

@@ -33,7 +33,7 @@ export class Router {
                 useLayout: '/templates/layout.html',
                 // загрузка js
                 load: () => {
-                    if (!localStorage.getItem('userInfo')) {
+                    if (!localStorage.getItem('accessToken')) {
                         return this.openNewRoute('/login');
                     } else {
                         document.body.classList.remove('login-page');
@@ -115,7 +115,7 @@ export class Router {
                 useLayout: '/templates/layout.html',
                 // загрузка js
                 load: () => {
-                    if (!localStorage.getItem('userInfo')) {
+                    if (!localStorage.getItem('accessToken')) {
                         return this.openNewRoute('/login');
                     } else {
                         new IncomeExpenses(this.openNewRoute.bind(this));
@@ -129,7 +129,7 @@ export class Router {
                 useLayout: '/templates/layout.html',
                 // загрузка js
                 load: () => {
-                    if (!localStorage.getItem('userInfo')) {
+                    if (!localStorage.getItem('accessToken')) {
                         return this.openNewRoute('/login');
                     } else {
                         new CreateIncomeExpenses(this.openNewRoute.bind(this));
@@ -143,7 +143,7 @@ export class Router {
                 useLayout: '/templates/layout.html',
                 // загрузка js
                 load: () => {
-                    if (!localStorage.getItem('userInfo')) {
+                    if (!localStorage.getItem('accessToken')) {
                         return this.openNewRoute('/login');
                     } else {
                         new EditIncomeExpenses(this.openNewRoute.bind(this));
@@ -156,7 +156,7 @@ export class Router {
                 filePathTemplate: '/templates/pages/category/income.html',
                 useLayout: '/templates/layout.html',
                 load: () => {
-                    if (!localStorage.getItem('userInfo')) {
+                    if (!localStorage.getItem('accessToken')) {
                         return this.openNewRoute('/login');
                     } else {
                         new Income(this.openNewRoute.bind(this));
@@ -170,7 +170,7 @@ export class Router {
                 filePathTemplate: '/templates/pages/category/create-income-category.html',
                 useLayout: '/templates/layout.html',
                 load: () => {
-                    if (!localStorage.getItem('userInfo')) {
+                    if (!localStorage.getItem('accessToken')) {
                         return this.openNewRoute('/login');
                     } else {
                         new CreateIncomeCategory(this.openNewRoute.bind(this));
@@ -183,7 +183,7 @@ export class Router {
                 filePathTemplate: '/templates/pages/category/edit-income-category.html',
                 useLayout: '/templates/layout.html',
                 load: () => {
-                    if (!localStorage.getItem('userInfo')) {
+                    if (!localStorage.getItem('accessToken')) {
                         return this.openNewRoute('/login');
                     } else {
                         new EditIncomeCategory(this.openNewRoute.bind(this));
@@ -196,7 +196,7 @@ export class Router {
                 filePathTemplate: '/templates/pages/category/expenses.html',
                 useLayout: '/templates/layout.html',
                 load: () => {
-                    if (!localStorage.getItem('userInfo')) {
+                    if (!localStorage.getItem('accessToken')) {
                         return this.openNewRoute('/login');
                     } else {
                         new Expenses(this.openNewRoute.bind(this));
@@ -209,7 +209,7 @@ export class Router {
                 filePathTemplate: '/templates/pages/category/create-expenses-category.html',
                 useLayout: '/templates/layout.html',
                 load: () => {
-                    if (!localStorage.getItem('userInfo')) {
+                    if (!localStorage.getItem('accessToken')) {
                         return this.openNewRoute('/login');
                     } else {
                         new CreateExpensesCategory(this.openNewRoute.bind(this));
@@ -222,7 +222,7 @@ export class Router {
                 filePathTemplate: '/templates/pages/category/edit-expenses-category.html',
                 useLayout: '/templates/layout.html',
                 load: () => {
-                    if (!localStorage.getItem('userInfo')) {
+                    if (!localStorage.getItem('accessToken')) {
                         return this.openNewRoute('/login');
                     } else {
                         new EditExpensesCategory(this.openNewRoute.bind(this));
