@@ -1,33 +1,16 @@
 import {AuthUtils} from "../../utils/auth-utils";
-import {ValidationUtils} from "../../utils/validation-utils";
 import {AuthService} from "../../services/auth-service";
-import {HttpUtils} from "../../utils/http-utils";
 
 export class SignUp {
     constructor(openNewRoute) {
         this.openNewRoute = openNewRoute;
 
         // если есть токен в локал сторедж, то перебрасываем на главную
-        if (localStorage.getItem('accessToken') ||
-            localStorage.getItem('userInfo')) {
+        if (localStorage.getItem('accessToken')) {
             return this.openNewRoute('/');
         }
 
-        //
-        // if (AuthUtils.getAuthInfo(AuthUtils.accessTokenKey)) {
-        //     return this.openNewRoute('/');
-        // }
-
         this.findElements();
-
-        // this.validations = [
-        //     {element: this.nameElement},
-        //     {element: this.lastNameElement},
-        //     {element: this.emailElement, option: {pattern: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([_.]\w+)*$/}},
-        //     {element: this.passwordElement, option: {pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/}},
-        //     {element: this.passwordRepeatElement, option: {compareTo: this.passwordElement.value}},
-        //
-        // ];
         document.getElementById('process-button').addEventListener('click', this.signUp.bind(this));
     }
 
@@ -86,7 +69,6 @@ export class SignUp {
 
         if (this.validateForm()) {
             // отправляем
-            // const result = await HttpUtils.request('/signup', 'POST', {
             const signupResult = await AuthService.signUp({
                 name: this.nameElement.value,
                 lastName: this.lastNameElement.value,
@@ -104,7 +86,8 @@ export class SignUp {
                     name: signupResult.user.name,
                     lastName: signupResult.user.lastName,
                 });
-                this.openNewRoute('/');
+                // если регистрация успешна, перекидываем на стр логина
+                this.openNewRoute('/login');
             }
             this.commonErrorElement.style.display = 'block';
         }

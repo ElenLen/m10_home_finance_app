@@ -4,22 +4,25 @@
     </h1>
     <section class="content d-flex flex-wrap" style="gap: 20px">
         <div class="border-0" style="max-width: 350px; ">
+            <select class="form-select border rounded-2" id="type"
+                    style="font-size: 15px; width: 397px; margin-bottom: 10px; padding: 7px 16px;">
+                <option value="" disabled selected>Тип...</option>
+            </select>
 
-            <input class="border rounded-2" type="text" placeholder="Тип..." id="type"
+            <select class="form-select border rounded-2" id="category"
+                    style="font-size: 15px; width: 397px; margin-bottom: 10px; padding: 7px 16px;">
+                <option value="" disabled selected>Категория...</option>
+            </select>
+
+            <input class="form-control border rounded-2" type="text" placeholder="Сумма в $..." id="amount"
+                   min="0" step="0.01"
                    style="font-size: 15px; width: 397px; margin-bottom: 10px; padding: 7px 16px;">
 
-            <input class="border rounded-2" type="text" placeholder="Категория..." id="category"
+            <input class="form-control border rounded-2" type="text" placeholder="Дата..." id="date"
                    style="font-size: 15px; width: 397px; margin-bottom: 10px; padding: 7px 16px;">
 
-            <input class="border rounded-2" type="text" placeholder="Сумма в $..." id="amount"
+            <input class="form-control border rounded-2" type="text" placeholder="Комментарий..." id="comment"
                    style="font-size: 15px; width: 397px; margin-bottom: 10px; padding: 7px 16px;">
-
-            <input class="border rounded-2" type="text" placeholder="Дата..." id="date"
-                   style="font-size: 15px; width: 397px; margin-bottom: 10px; padding: 7px 16px;">
-
-            <input class="border rounded-2" type="text" placeholder="Комментарий..." id="comment"
-                   style="font-size: 15px; width: 397px; margin-bottom: 10px; padding: 7px 16px;">
-
 
             <div style="margin-top: 10px">
                 <button type="button" class="btn btn-success" style="margin-right: 10px; font-size: 14px; width: 88px;">

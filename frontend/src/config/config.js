@@ -1,20 +1,8 @@
-// const host = process.env.HOST;
+const host = process.env.HOST;
 const config = {
-    api: 'http://localhost:3000/api'
-
-    // host: host,
-    // api: host + '/api',
-    // freelancerLevels: {
-    //     junior: 'junior',
-    //     middle: 'middle',
-    //     senior: 'senior',
-    // },
-    // orderStatuses: {
-    //     new: 'new',
-    //     confirmed: 'confirmed',
-    //     success: 'success',
-    //     canceled: 'canceled',
-    // },
+    // host - прописан в файле .env
+    host: host,
+    api: host + '/api',
 }
 
 export default config;

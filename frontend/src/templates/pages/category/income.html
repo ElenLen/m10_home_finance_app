@@ -2,67 +2,37 @@
     <h1 class="h1 fw-medium text-primary-emphasis" style="font-size: 40px; margin-bottom: 40px ">
         Доходы
     </h1>
-    <section class="content d-flex flex-wrap" style="gap: 20px">
-        <div class="cardWidth border rounded-3" >
-            <h3 style="margin-bottom: 10px">Депозиты</h3>
-            <a href="/edit-income" class="text-decoration-none">
-                <button type="button" class="btn btn-primary" style="margin-right: 10px; font-size: 14px;">
-                    Редактировать
-                </button>
-            </a>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop" style="font-size: 14px;">
-                Удалить
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                         <div class="modal-body text-center" style="padding: 40px 0; font-size: 20px; ">
-                             Вы действительно хотите удалить категорию?
-                             Связанные доходы останутся без категории.
-                            <div style="margin-top: 20px; ">
-                                <button type="button" class="btn btn-success me-2">Да, удалить</button>
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Не удалять</button>
-                            </div>
-
+    <section class="content d-flex flex-wrap" style="gap: 20px" id="container">
+        <!--  Modal -->
+        <div class="modal fade"
+             id="staticBackdrop"
+             data-bs-backdrop="static"
+             data-bs-keyboard="false"
+             tabindex="-1"
+             aria-labelledby="staticBackdropLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body text-center" style="padding: 40px 0; font-size: 20px; ">
+                        Вы действительно хотите удалить категорию?
+                        Связанные доходы останутся без категории.
+                        <div style="margin-top: 20px; ">
+                            <button type="button" class="btn btn-success me-2" id="income-delete">
+                                Да, удалить
+                            </button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                Не удалять
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
+        <!--        новый контент с бэка-->
+        <div class=" d-flex flex-wrap" style="gap: 20px" id="income-section"></div>
 
-        </div>
-        <div class="cardWidth border rounded-3" >
-            <h3 style="margin-bottom: 10px">Зарплата</h3>
-            <a href="/edit-income" class="text-decoration-none">
-                <button type="button" class="btn btn-primary" style="margin-right: 10px; font-size: 14px;">
-                    Редактировать
-                </button>
-            </a>
-            <button type="button" class="btn btn-danger" style="font-size: 14px;">Удалить</button>
-        </div>
-        <div class="cardWidth border rounded-3" >
-            <h3 style="margin-bottom: 10px">Сбережения</h3>
-            <a href="/edit-income" class="text-decoration-none">
-                <button type="button" class="btn btn-primary" style="margin-right: 10px; font-size: 14px;">
-                    Редактировать
-                </button>
-            </a>
-            <button type="button" class="btn btn-danger" style="font-size: 14px;">Удалить</button>
-        </div>
-        <div class="cardWidth border rounded-3" >
-            <h3 style="margin-bottom: 10px">Инвестиции</h3>
-            <a href="/edit-income" class="text-decoration-none">
-                <button type="button" class="btn btn-primary" style="margin-right: 10px; font-size: 14px;">
-                    Редактировать
-                </button>
-            </a>
-            <button type="button" class="btn btn-danger" style="font-size: 14px;">Удалить</button>
-        </div>
+        <!--кнопка для добавления новой категории-->
         <div class="cardWidth border rounded-3 d-flex align-items-center justify-content-center">
             <a href="/create-income" class="text-decoration-none">
                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none">

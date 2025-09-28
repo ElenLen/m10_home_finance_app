@@ -3,15 +3,22 @@
         Создание категории доходов
     </h1>
     <section class="content d-flex flex-wrap" style="gap: 20px">
-        <div class="border-0" >
+        <div class="border-0">
+            <div style="margin-bottom: 20px;">
+                <input class="border" type="text" placeholder="Название..."
+                       id="name-category" style="font-size: 15px; width: 397px;">
+                <span id="name-category-error" class="error invalid-feedback text-start">
+                        Заполните поле
+                </span>
+            </div>
 
-            <input class="border" type="text" placeholder="Название..." id="name-category"
-                   style="font-size: 15px; width: 397px; margin-bottom: 20px;  ">
             <div>
-                <button type="button" class="btn btn-success" style="margin-right: 10px; font-size: 14px;  ">
+                <button type="button" class="btn btn-success" style="margin-right: 10px; font-size: 14px;"
+                        id="saveButton">
                     Создать
                 </button>
-                <button type="button" class="btn btn-danger" style="font-size: 14px; ">
+                <button type="button" class="btn btn-danger" style="font-size: 14px;"
+                        id="cancelButton">
                     Отмена
                 </button>
             </div>
