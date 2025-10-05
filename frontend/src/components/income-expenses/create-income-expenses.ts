@@ -5,19 +5,8 @@ import {UrlUtils} from "../../utils/url-utils";
 import {CategoryType} from "../../types/category.type";
 import {OperationType} from "../../types/operation.type";
 import {OperationResponseType} from "../../types/operation-response.type";
-
-type OpenNewRouteFunction = (url: string) => void;
-
-interface Elements {
-    typeSelect: HTMLSelectElement | null;
-    categorySelect: HTMLSelectElement | null;
-    amountInput: HTMLInputElement | null;
-    dateInput: HTMLInputElement | null;
-    commentInput: HTMLInputElement | null;
-    createButton: HTMLButtonElement | null;
-    cancelButton: HTMLButtonElement | null;
-    errorContainer: HTMLElement | null;
-}
+import {Elements} from "../../types/elements";
+import {OpenNewRouteFunction} from "../../types/open-new-route-function";
 
 export class CreateIncomeExpenses {
     private openNewRoute: OpenNewRouteFunction;

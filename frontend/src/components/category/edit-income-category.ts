@@ -1,8 +1,7 @@
 import {CategoryIncomeService} from "../../services/category-income-service";
 import {UrlUtils} from "../../utils/url-utils";
 import {CategoryType} from "../../types/category.type";
-
-type OpenNewRouteFunction = (url: string) => void;
+import {OpenNewRouteFunction} from "../../types/open-new-route-function";
 
 export class EditIncomeCategory {
     private openNewRoute: OpenNewRouteFunction;

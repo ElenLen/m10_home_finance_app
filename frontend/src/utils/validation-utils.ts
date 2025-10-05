@@ -1,14 +1,5 @@
-interface ValidationOptions {
-    pattern?: RegExp;
-    compareTo?: string;
-    checkProperty?: boolean;
-    checked?: boolean;
-}
-
-interface ValidationRule {
-    element: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
-    options?: ValidationOptions;
-}
+import {ValidationRule} from "../types/validation-rule";
+import {ValidationOptions} from "../types/validation-options";
 
 export class ValidationUtils {
     static validateForm(validations: ValidationRule[]): boolean {

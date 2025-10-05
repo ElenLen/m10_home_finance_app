@@ -2,8 +2,7 @@ import {OperationsService} from "../../services/operations-service";
 import {OperationIncomeType} from "../../types/operation-income.type";
 import {OperationResponseIncomeType} from "../../types/operation-response-income.type";
 import {ElementsIncomeExpensesType} from "../../types/elements-income-expenses.type";
-
-type OpenNewRouteFunction = (url: string) => void;
+import {OpenNewRouteFunction} from "../../types/open-new-route-function";
 
 export class IncomeExpenses {
     private openNewRoute: OpenNewRouteFunction;
@@ -413,8 +412,8 @@ export class IncomeExpenses {
                 return;
             }
 
-            this.operations = Array.isArray(response.operation)
-                ? response.operation
+            this.operations = Array.isArray(response.operations)
+                ? response.operations
                 : Array.isArray(response.date)
                     ? response.date
                     : [];
@@ -446,7 +445,7 @@ export class IncomeExpenses {
         });
     }
 
-    private createOperationRow(operation: OperationIncomeType, number: number): HTMLTableRowElement {
+    private createOperationRow(operations: OperationIncomeType, number: number): HTMLTableRowElement {
         const row = document.createElement('tr');
 
         const numberCell = document.createElement('th');
@@ -455,28 +454,28 @@ export class IncomeExpenses {
         row.appendChild(numberCell);
 
         const typeCell = document.createElement('td');
-        typeCell.textContent = operation.type === 'income' ? 'доход' : 'расход';
-        typeCell.className = operation.type === 'income' ? 'text-success' : 'text-danger';
+        typeCell.textContent = operations.type === 'income' ? 'доход' : 'расход';
+        typeCell.className = operations.type === 'income' ? 'text-success' : 'text-danger';
         row.appendChild(typeCell);
 
         const categoryCell = document.createElement('td');
-        categoryCell.textContent = operation.category || operation.category_title || '—';
+        categoryCell.textContent = operations.category || operations.category_title || '—';
         row.appendChild(categoryCell);
 
         const amountCell = document.createElement('td');
-        amountCell.textContent = `${operation.amount}$`;
+        amountCell.textContent = `${operations.amount}$`;
         row.appendChild(amountCell);
 
         const dateCell = document.createElement('td');
-        dateCell.textContent = this.formatDate(operation.date);
+        dateCell.textContent = this.formatDate(operations.date);
         row.appendChild(dateCell);
 
         const commentCell = document.createElement('td');
-        commentCell.textContent = operation.comment || '—';
+        commentCell.textContent = operations.comment || '—';
         row.appendChild(commentCell);
 
         const actionsCell = document.createElement('td');
-        actionsCell.innerHTML = this.createActionButtons(operation);
+        actionsCell.innerHTML = this.createActionButtons(operations);
         row.appendChild(actionsCell);
 
         return row;

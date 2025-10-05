@@ -3,8 +3,19 @@ import {OperationHomeType} from "../types/operation-home.type";
 import {OperationsResponseHomeType} from "../types/operations-response-home.type";
 import {ElementsHomeType} from "../types/elements-home.type";
 import {ChartDataType} from "../types/chart-data.type";
+import {OpenNewRouteFunction} from "../types/open-new-route-function";
+import {ChartConfiguration} from "../types/chart-configuration";
+import {Chart} from "../types/chart";
+import {ChartTooltipContext} from "../types/chart-tooltip-context";
 
-type OpenNewRouteFunction = (url: string) => void;
+// Объявляем Chart в window
+declare global {
+    interface Window {
+        Chart: {
+            new (context: CanvasRenderingContext2D | HTMLCanvasElement, config: ChartConfiguration): Chart;
+        };
+    }
+}
 
 export class Home {
     private openNewRoute: OpenNewRouteFunction;
@@ -12,8 +23,8 @@ export class Home {
     private currentFilter: string;
     private dateFrom: string;
     private dateTo: string;
-    private incomeChart: any; // Chart.js instance
-    private expenseChart: any; // Chart.js instance
+    private incomeChart: Chart | null;
+    private expenseChart: Chart | null;
     private elements: ElementsHomeType;
 
     constructor(openNewRoute: OpenNewRouteFunction) {
@@ -450,7 +461,7 @@ export class Home {
                     // расчет процента для графика
                     tooltip: {
                         callbacks: {
-                            label: function (context:any) {
+                            label: function (context:ChartTooltipContext): string {
                                 const label = context.label || '';
                                 const value = context.raw || 0;
                                 // total - Сумма всех значений в датасете
@@ -460,7 +471,7 @@ export class Home {
                                     percentage = (value / total) * 100;
                                 }
                                 // округление: показываем больше знаков для маленьких процентов
-                                let roundedPercentage;
+                                let roundedPercentage: string;
                                 if (percentage < 0.01) {
                                     roundedPercentage = percentage.toFixed(4); // 0.0023%
                                 } else if (percentage < 1) {
@@ -489,14 +500,11 @@ export class Home {
         };
 
         try {
-            const Chart = (window as any).Chart;
-            // Создаем новый график
             if (type === 'income') {
-                this.incomeChart = new Chart(canvas, chartConfig);
+                this.incomeChart = new window.Chart(canvas, chartConfig);
             } else {
-                this.expenseChart = new Chart(canvas, chartConfig);
+                this.expenseChart = new window.Chart(canvas, chartConfig);
             }
-
             // console.log(`График ${type} успешно создан`);
         } catch (error) {
             // console.log(`Ошибка создания графика ${type}:`, error);
@@ -511,7 +519,7 @@ export class Home {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // Создаем простой график с одной категорией "Нет данных"
-        const chartConfig = {
+        const chartConfig: ChartConfiguration = {
             type: 'pie' as const,
             data: {
                 labels: ['Нет данных'],
@@ -552,11 +560,10 @@ export class Home {
         };
 
         try {
-            const Chart = (window as any).Chart;
             if (type === 'income') {
-                this.incomeChart = new Chart(canvas, chartConfig);
+                this.incomeChart = new window.Chart(canvas, chartConfig);
             } else {
-                this.expenseChart = new Chart(canvas, chartConfig);
+                this.expenseChart = new window.Chart(canvas, chartConfig);
             }
             // console.log(`График ${type} с сообщением "Нет данных" создан`);
         } catch (error) {

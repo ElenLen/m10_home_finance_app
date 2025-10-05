@@ -6,8 +6,11 @@ import {CategoryType} from "../../types/category.type";
 import {OperationIncomeType} from "../../types/operation-income.type";
 import {ElementsType} from "../../types/elements.type";
 import {OperationResponseIncomeType} from "../../types/operation-response-income.type";
+import {OpenNewRouteFunction} from "../../types/open-new-route-function";
 
-type OpenNewRouteFunction = (url: string) => void;
+interface CustomHTMLOptionElement extends HTMLOptionElement {
+    category_id?: number;
+}
 
 export class EditIncomeExpenses {
     private openNewRoute: OpenNewRouteFunction;
@@ -121,7 +124,7 @@ export class EditIncomeExpenses {
                 return;
             }
 
-            this.operationOriginalData = response.operation || null;
+            this.operationOriginalData = response.operations || null;
             // console.log('Данные операции:', this.operationOriginalData);
 
             if (!this.operationOriginalData) {
@@ -302,6 +305,8 @@ export class EditIncomeExpenses {
         if (this.elements.amountInput && this.operationOriginalData.amount) {
             if (typeof this.operationOriginalData.amount === "string") {
                 this.elements.amountInput.value = this.operationOriginalData.amount;
+            } else {
+                this.elements.amountInput.value = this.operationOriginalData.amount.toString();
             }
         }
 
@@ -401,7 +406,7 @@ export class EditIncomeExpenses {
                 amount: this.elements.amountInput ? parseFloat(this.elements.amountInput.value) : 0,
                 date: this.elements.dateInput?.value || '',
                 comment: this.elements.commentInput?.value.trim() || '',
-                category_id: this.elements.categorySelect ? parseInt(this.elements.categorySelect.selectedIndex.toString()) : 0
+                category_id: this.elements.categorySelect ? updateData.category_id : 0
             };
         }
 
@@ -435,7 +440,11 @@ export class EditIncomeExpenses {
         }
 
         if (this.elements.categorySelect) {
-            const currentCategoryId = parseInt(this.elements.categorySelect.selectedIndex.toString());
+            const select = this.elements.categorySelect as HTMLSelectElement;
+            const selectedOption = select.options[select.selectedIndex] as CustomHTMLOptionElement;
+            const categoryId = selectedOption.category_id;
+
+            const currentCategoryId = categoryId || 0;
             const originalCategoryId = this.operationOriginalData.category_id || 0;
             if (currentCategoryId !== originalCategoryId) {
                 updateData.category_id = currentCategoryId;

@@ -1,6 +1,5 @@
 import {CategoryIncomeService} from "../../services/category-income-service";
-
-type OpenNewRouteFunction = (url: string) => void;
+import {OpenNewRouteFunction} from "../../types/open-new-route-function";
 
 export class CreateIncomeCategory {
     private openNewRoute: OpenNewRouteFunction;

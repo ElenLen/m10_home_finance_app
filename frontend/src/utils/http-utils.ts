@@ -1,21 +1,7 @@
 import config from "../config/config";
 import {AuthUtils} from "./auth-utils";
-
-interface RequestResult {
-    error: boolean;
-    response?: any;
-    redirect?: string;
-}
-
-interface RequestParams {
-    method: string;
-    headers: {
-        'Content-type': string;
-        'Accept': string;
-        'x-auth-token'?: string;
-    };
-    body?: string;
-}
+import {RequestResult} from "../types/request-result";
+import {RequestParams} from "../types/request-params";
 
 export class HttpUtils {
     static async request(

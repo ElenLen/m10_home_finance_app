@@ -2,31 +2,18 @@ import {HttpUtils} from "../utils/http-utils";
 import {OperationIncomeType} from "../types/operation-income.type";
 import {BaseReturnObjectType} from "../types/base-return-object.type";
 
-// Типы для операций
-// export interface Operation {
-//     id: number;
-//     type: 'income' | 'expense';
-//     amount: number;
-//     date: string;
-//     comment: string;
-//     category?: string;
-//     category_id?: number;
-// }
-
-
 // Интерфейсы для конкретных методов
 interface GetOperationsReturnObject extends BaseReturnObjectType {
     operations: OperationIncomeType[] | null;
 }
 
 interface GetOperationReturnObject extends BaseReturnObjectType {
-    operation: OperationIncomeType | null;
+    operations: OperationIncomeType | null;
 }
 
 interface CreateOperationReturnObject extends BaseReturnObjectType {
     id: number | null;
 }
-
 
 export class OperationsService {
     static async getOperations(): Promise<GetOperationsReturnObject> {
@@ -103,7 +90,7 @@ export class OperationsService {
         const returnObject: GetOperationReturnObject = {
             error: false,
             redirect: null,
-            operation: null,
+            operations: null,
         };
 
         const result = await HttpUtils.request('/operations/' + id);
@@ -117,7 +104,7 @@ export class OperationsService {
             return returnObject;
         }
 
-        returnObject.operation = result.response;
+        returnObject.operations = result.response;
         return returnObject;
 
         // GET

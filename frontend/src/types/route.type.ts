@@ -2,9 +2,11 @@ export interface RouteType {
     route: string;
     title: string;
     filePathTemplate: string;
-    useLayout: string | false | undefined;
+    useLayout: string | false ;
+
     styles?: string[];
     scripts?: string[];
-    load?: () => void;
+
+    load: () => void;
     unload?: () => void;
 }

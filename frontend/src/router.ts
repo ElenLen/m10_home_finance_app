@@ -20,7 +20,7 @@ export class Router {
     private contentPageElement: HTMLElement | null;
     private profileNameElement: HTMLElement | null;
     private balanceElement: HTMLElement | null;
-    private adminLteStyleElement: HTMLElement | null;
+    // private adminLteStyleElement: HTMLElement | null;
     private userName: string | null;
     private userBalance: number;
     private routes: RouteType[];
@@ -30,7 +30,7 @@ export class Router {
         this.contentPageElement = document.getElementById('content');
         this.profileNameElement = null;
         this.balanceElement = null;
-        this.adminLteStyleElement = null;
+        // this.adminLteStyleElement = null;
         this.userName = null;
         this.userBalance = 0;
 
@@ -121,7 +121,7 @@ export class Router {
                 route: '/logout',
                 title: "",
                 filePathTemplate: "",
-                useLayout: undefined,
+                useLayout: false,
                 load: () => {
                     new Logout(this.openNewRoute.bind(this));
                 },
@@ -266,7 +266,7 @@ export class Router {
                 unload: (): void => {
                 }
             }
-        ] as RouteType[];
+        ] ;
     }
 
     private initEvents(): void {
@@ -309,7 +309,6 @@ export class Router {
     }
 
 //     активация роутера
-//     private FileUtils: any;
     public async activateRoute(e: Event | null, oldRoute: string | null = null): Promise<void> {
         // если найден, удаляем стили
         if (oldRoute) {
@@ -370,7 +369,7 @@ export class Router {
 
                     // если имя уже есть, то не меняем
                     if (!this.userName && this.profileNameElement) {
-                        let userInfo = AuthUtils.getAuthInfo(AuthUtils.userInfoTokenKey as any);
+                        let userInfo = AuthUtils.getAuthInfo(AuthUtils.userInfoTokenKey as string);
                         if (userInfo && typeof userInfo === 'string') {
                             try {
                                 const parsedUserInfo = JSON.parse(userInfo);

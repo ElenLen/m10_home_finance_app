@@ -1,7 +1,6 @@
 import {CategoryExpenseService} from "../../services/category-expense-service";
 import {CategoryType} from "../../types/category.type";
-
-type OpenNewRouteFunction = (url: string) => void;
+import {OpenNewRouteFunction} from "../../types/open-new-route-function";
 
 export class Expenses {
     private openNewRoute: OpenNewRouteFunction;

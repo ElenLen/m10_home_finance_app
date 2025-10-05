@@ -15,15 +15,6 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.less$/i,
-                use: [
-                    // compiles Less to CSS
-                    "style-loader",
-                    "css-loader",
-                    "less-loader",
-                ],
-            },
-            {
                 test: /\.scss$/,
                 use: [
                     'style-loader',
@@ -37,7 +28,7 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js'],
     },
     output: {
-        filename: 'app.js',
+        filename: 'main.js',
         path: path.resolve(__dirname, 'dist'),
     },
     devServer: {
@@ -48,18 +39,6 @@ module.exports = {
         port: 9002,
         historyApiFallback: true,
     },
-    // module: {
-    //     rules: [
-    //         {
-    //             test: /\.scss$/i,
-    //             use: [
-    //                 "style-loader",
-    //                 "css-loader",
-    //                 "sass-loader",
-    //             ],
-    //         },
-    //     ],
-    // },
 
     plugins: [
         new Dotenv(),

@@ -1,7 +1,6 @@
 import {AuthUtils} from "../../utils/auth-utils";
 import {AuthService} from "../../services/auth-service";
-
-type OpenNewRouteFunction = (url: string) => void;
+import {OpenNewRouteFunction} from "../../types/open-new-route-function";
 
 export class Logout {
     private openNewRoute: OpenNewRouteFunction;

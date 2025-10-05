@@ -1,12 +1,19 @@
 import {CategoryIncomeService} from "../../services/category-income-service";
 import {CategoryType} from "../../types/category.type";
+import {OpenNewRouteFunction} from "../../types/open-new-route-function";
+import {Bootstrap} from "../../types/bootstrap";
+import {BootstrapModal} from "../../types/bootstrap-modal";
 
-type OpenNewRouteFunction = (url: string) => void;
+declare global {
+    interface Window {
+        bootstrap: Bootstrap;
+    }
+}
 
 export class Income {
     private openNewRoute: OpenNewRouteFunction;
     private currentDeleteId: string | null;
-    private modal: any; // bootstrap.Modal
+    private modal: BootstrapModal | null;
     private btnModalDel: HTMLButtonElement | null;
 
     constructor(openNewRoute: OpenNewRouteFunction) {
@@ -20,8 +27,7 @@ export class Income {
         //  модальное окно
         const modalElement = document.getElementById('staticBackdrop');
         if (modalElement) {
-            const bootstrap = (window as any).bootstrap;
-            this.modal = new bootstrap.Modal(modalElement);
+            this.modal = new window.bootstrap.Modal(modalElement);
 
             // для сброса id при закрытии модалки
             modalElement.addEventListener('hidden.bs.modal', () => {
@@ -49,7 +55,7 @@ export class Income {
 
 //     запрос всех доходов
     private async getCategoriesIncome(): Promise<void> {
-        const response: any = await CategoryIncomeService.getCategories();
+        const response = await CategoryIncomeService.getCategories();
 
         if (response.error) {
             // console.log('Ошибка загрузки операций:', response.error);

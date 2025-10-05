@@ -1,7 +1,6 @@
 import {AuthUtils} from "../../utils/auth-utils";
 import {AuthService} from "../../services/auth-service";
-
-type OpenNewRouteFunction = (url: string) => void;
+import {OpenNewRouteFunction} from "../../types/open-new-route-function";
 
 export class SignUp {
     private openNewRoute: OpenNewRouteFunction;
@@ -107,7 +106,7 @@ export class SignUp {
                 lastName: this.lastNameElement.value,
                 email: this.emailElement.value,
                 password: this.passwordElement.value,
-                // passwordRepeat: this.passwordRepeatElement.value,
+                passwordRepeat: this.passwordRepeatElement.value,
             })
 
             // токенов нет

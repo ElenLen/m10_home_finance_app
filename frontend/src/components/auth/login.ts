@@ -1,18 +1,22 @@
 import {AuthUtils} from "../../utils/auth-utils";
 import {AuthService} from "../../services/auth-service";
 import {LoginResponseType} from "../../types/login-response.type";
-
-type OpenNewRouteFunction = (url: string) => void;
+import {UserInfoType} from "../../types/user-info.type";
+import {OpenNewRouteFunction} from "../../types/open-new-route-function";
 
 export class Login {
     private openNewRoute: OpenNewRouteFunction;
-    private emailElement: HTMLInputElement | undefined;
-    private passwordElement: HTMLInputElement | undefined;
-    private rememberMeElement: HTMLInputElement | undefined;
-    private commonErrorElement: HTMLElement | undefined;
+    private emailElement: HTMLInputElement | null;
+    private passwordElement: HTMLInputElement | null;
+    private rememberMeElement: HTMLInputElement | null;
+    private commonErrorElement: HTMLElement | null;
 
     constructor(openNewRoute: OpenNewRouteFunction) {
         this.openNewRoute = openNewRoute;
+        this.emailElement = null;
+        this.passwordElement = null;
+        this.rememberMeElement = null;
+        this.commonErrorElement = null;
 
         // если есть токен в локал сторедж, то перебрасываем на главную
         if (localStorage.getItem('accessToken')) {
@@ -31,7 +35,7 @@ export class Login {
         this.emailElement = document.getElementById('email') as HTMLInputElement;
         this.passwordElement = document.getElementById('password') as HTMLInputElement;
         this.rememberMeElement = document.getElementById('remember-me') as HTMLInputElement;
-        this.commonErrorElement = document.getElementById('common-error') as HTMLInputElement;
+        this.commonErrorElement = document.getElementById('common-error');
     }
 
     private validateForm(): boolean {
@@ -68,7 +72,7 @@ export class Login {
             this.rememberMeElement
         ) {
             // отправляем запрос
-            const loginResult: void | LoginResponseType = await AuthService.logIn({
+            const loginResult: LoginResponseType | void = await AuthService.logIn({
                 email: this.emailElement.value,
                 password: this.passwordElement.value,
                 // rememberMe: this.rememberMeElement.checked
@@ -78,15 +82,17 @@ export class Login {
             if (loginResult &&
                 loginResult.tokens &&
                 loginResult.user) {
+                const userInfo: UserInfoType = {
+                    id: loginResult.user.id,
+                    name: loginResult.user.name,
+                    lastName: loginResult.user.lastName,
+                    email: loginResult.user.email || ''
+                };
 
                 AuthUtils.setAuthInfo(
                     loginResult.tokens.accessToken,
                     loginResult.tokens.refreshToken,
-                    {
-                        id: loginResult.user.id,
-                        name: loginResult.user.name,
-                        lastName: loginResult.user.lastName
-                    } as any
+                    userInfo
                 );
                 this.openNewRoute('/');
                 return;
