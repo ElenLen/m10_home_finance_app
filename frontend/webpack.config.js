@@ -4,10 +4,31 @@ const CopyPlugin = require("copy-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 
 module.exports = {
-    entry: './src/app.js',
+    entry: './src/app.ts',
     mode: 'development',
+    devtool: 'inline-source-map',
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader'
+                ]
+            },
+        ],
+    },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
+    },
     output: {
-        filename: 'app.js',
+        filename: 'main.js',
         path: path.resolve(__dirname, 'dist'),
     },
     devServer: {
@@ -17,18 +38,6 @@ module.exports = {
         compress: true,
         port: 9002,
         historyApiFallback: true,
-    },
-    module: {
-        rules: [
-            {
-                test: /\.scss$/i,
-                use: [
-                    "style-loader",
-                    "css-loader",
-                    "sass-loader",
-                ],
-            },
-        ],
     },
 
     plugins: [
